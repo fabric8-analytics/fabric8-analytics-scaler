@@ -10,6 +10,8 @@ Python script sqs_status accepts one parameter which is queue name
 
 ### Configure maximum and minimum number of pods for scaling
 
-`$export WORKER_POD_TO_SCALE=bayesian-worker-api `
+`$export WORKER_POD_TO_SCALE=bayesian-worker-api`
+
 `$export DEFAULT_NUMBER_OF_PODS=2`
+
 `$export MAX_NUMBER_OF_PODS=10`
