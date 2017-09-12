@@ -12,6 +12,8 @@ Python script sqs_status accepts one parameter which is queue name
 
 `$export WORKER_POD_TO_SCALE=bayesian-worker-api`
 
+`$export SQS_QUEUE_FOR_SCALING=prod_ingestion_InitAnalysisFlow_v0`
+
 `$export DEFAULT_NUMBER_OF_PODS=2`
 
 `$export MAX_NUMBER_OF_PODS=10`
