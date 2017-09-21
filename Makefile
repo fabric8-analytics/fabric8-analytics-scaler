@@ -13,7 +13,6 @@ fast-docker-build:
 	docker build -t $(REGISTRY)/$(REPOSITORY):$(DEFAULT_TAG) .
 
 test: fast-docker-build
-	./tests/run_integration_tests.sh
 
 get-image-name:
 	@echo $(REGISTRY)/$(REPOSITORY):$(DEFAULT_TAG)
