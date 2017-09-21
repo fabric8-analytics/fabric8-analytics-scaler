@@ -17,3 +17,7 @@ Python script sqs_status accepts one parameter which is queue name
 `$ export DEFAULT_NUMBER_OF_PODS=2`
 
 `$ export MAX_NUMBER_OF_PODS=10`
+
+### Deployment on openshift
+
+Openshift deployment information is located at [openshift](https://github.com/fabric8-analytics/fabric8-analytics-scaler/tree/master/openshift) directory
