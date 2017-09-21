@@ -6,14 +6,14 @@ scale.sh is run periodically every minute for now.
 
 Python script sqs_status accepts one parameter which is queue name
 
-`$sqs_status.py -q $SQS_QUEUE_FOR_SCALING`
+`$ sqs_status.py -q $SQS_QUEUE_FOR_SCALING`
 
 ### Configure maximum and minimum number of pods for scaling
 
-`$export WORKER_POD_TO_SCALE=bayesian-worker-api`
+`$ export WORKER_POD_TO_SCALE=bayesian-worker-api`
 
-`$export SQS_QUEUE_FOR_SCALING=prod_ingestion_InitAnalysisFlow_v0`
+`$ export SQS_QUEUE_FOR_SCALING=prod_ingestion_InitAnalysisFlow_v0`
 
-`$export DEFAULT_NUMBER_OF_PODS=2`
+`$ export DEFAULT_NUMBER_OF_PODS=2`
 
-`$export MAX_NUMBER_OF_PODS=10`
+`$ export MAX_NUMBER_OF_PODS=10`
