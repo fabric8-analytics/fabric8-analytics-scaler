@@ -6,6 +6,6 @@ set -ex
 
 build_image
 
-IMAGE_NAME=$(make get-image-name) ./tests/run_integration_tests.sh
+#IMAGE_NAME=$(make get-image-name) ./tests/run_integration_tests.sh
 
 push_image
