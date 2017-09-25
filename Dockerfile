@@ -4,7 +4,7 @@ MAINTAINER Tomas Hrcka <thrcka@redhat.com>
 ENV LANG=en_US.UTF-8
 
 RUN yum --setopt=tsflags=nodocs install -y epel-release centos-release-openshift-origin && \
-    yum --setopt=tsflags=nodocs install -y cronie python34-pip wget python34-devel libxml2-devel libxslt-devel python34-requests python34-pycurl origin-clients && \
+    yum --setopt=tsflags=nodocs install -y cronie crontabs python34-pip wget python34-devel libxml2-devel libxslt-devel python34-requests python34-pycurl origin-clients && \
     yum clean all
 
 RUN pip3 install --upgrade pip && pip install --upgrade wheel && \

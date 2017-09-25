@@ -1,3 +1,5 @@
+[![Build Status](https://ci.centos.org/buildStatus/icon?job=devtools-fabric8-analytics-scaler-f8a-build-master)](https://ci.centos.org/job/devtools-fabric8-analytics-scaler-f8a-build-master/)
+
 # fabric8-analytics-worker-scaler
 Openshift service that scales fabric8 analytics workers based on SQS queue size.
 scale.sh is run periodically every minute for now.
