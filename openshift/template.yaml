@@ -11,17 +11,17 @@ objects:
   kind: DeploymentConfig
   metadata:
     labels:
-      service: f8a-worker-scaler-${WORKER_POD_TO_SCALE}
-    name: f8a-worker-scaler-${WORKER_POD_TO_SCALE}
+      service: f8a-worker-scaler
+    name: f8a-worker-scaler
   spec:
     selector:
-      service: f8a-worker-scaler-${WORKER_POD_TO_SCALE}
+      service: f8a-worker-scaler
     strategy:
       type: Rolling
     template:
       metadata:
         labels:
-          service: f8a-worker-scaler-${WORKER_POD_TO_SCALE}
+          service: f8a-worker-scaler
       spec:
         containers:
         - env:
