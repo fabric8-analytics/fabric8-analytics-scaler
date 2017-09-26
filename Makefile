@@ -1,5 +1,5 @@
 REGISTRY?=registry.devshift.net
-REPOSITORY?=bayesian/worker-scaler
+REPOSITORY?=fabric8-analytics/worker-scaler
 DEFAULT_TAG=latest
 
 .PHONY: all docker-build fast-docker-build test get-image-name get-image-repository

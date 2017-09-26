@@ -88,7 +88,7 @@ parameters:
   displayName: Docker image
   required: true
   name: DOCKER_IMAGE
-  value: "bayesian/worker-scaler"
+  value: "fabric8-analytics/worker-scaler"
 
 - description: Image tag
   displayName: Image tag
