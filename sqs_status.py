@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 
-import sys, getopt, os
+import argparse
+import os
+import sys
+
 import boto3
 
 conn_args = {
@@ -8,25 +11,26 @@ conn_args = {
     'aws_secret_access_key': os.getenv('AWS_SQS_SECRET_ACCESS_KEY'),
     'region_name': 'us-east-1'
 }
-sqs = boto3.resource('sqs',**conn_args)
-queue = None
+sqs = boto3.resource('sqs', **conn_args)
 
-def main(argv):
-   sqs_queue_name = ''
-   try:
-      opts, args = getopt.getopt(argv,"hq:",["queue="])
-   except getopt.GetoptError:
-      print('test.py -q <queue_name>')
-      sys.exit(2)
-   for opt, arg in opts:
-      if opt == '-h':
-         print('test.py -q <queue_name>')
-         sys.exit()
-      elif opt in ("-q", "--queue"):
-         sqs_queue_name = arg
-         queue = sqs.get_queue_by_name(QueueName=sqs_queue_name)
-         result = queue.attributes.get('ApproximateNumberOfMessages')
-         print(result)
 
-if __name__ == "__main__":
-   main(sys.argv[1:])
+def get_number_of_messages(queue_name):
+    """Return approximate number of messages in given queue.
+
+    :param queue_name: name of the queue to check
+    :return approximate: number of messages in the given queue
+    """
+    queue = sqs.get_queue_by_name(QueueName=queue_name)
+    return queue.attributes.get('ApproximateNumberOfMessages')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='Report approximate number of messages in given queue.')
+    parser.add_argument('-q', '--queue', help='queue to check')
+    args = parser.parse_args()
+    if not args.queue:
+        print(parser.format_usage())
+        sys.exit(1)
+
+    print(get_number_of_messages(queue_name=args.queue))
