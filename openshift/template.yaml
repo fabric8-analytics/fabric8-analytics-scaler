@@ -50,18 +50,6 @@ objects:
             value: "${MAX_NUMBER_OF_PODS}"
           image: "${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${IMAGE_TAG}"
           name: f8a-worker-scaler
-          readinessProbe:
-            exec:
-              command: ["worker-readiness.sh"]
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 5
-          livenessProbe:
-            exec:
-              command: ["worker-liveness.sh"]
-            initialDelaySeconds: 20
-            periodSeconds: 60
-            timeoutSeconds: 5
           resources:
             requests:
               memory: "512Mi"
