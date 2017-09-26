@@ -52,9 +52,9 @@ objects:
           name: f8a-worker-scaler
           resources:
             requests:
-              memory: "512Mi"
+              memory: "128Mi"
             limits:
-              memory: "2048Mi"
+              memory: "256Mi"
         restartPolicy: Always
     triggers:
     - type: ConfigChange
