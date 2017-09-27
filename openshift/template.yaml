@@ -14,6 +14,7 @@ objects:
       service: f8a-worker-scaler
     name: f8a-worker-scaler
   spec:
+    replicas: 1
     selector:
       service: f8a-worker-scaler
     strategy:
