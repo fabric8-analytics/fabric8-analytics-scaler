@@ -10,9 +10,9 @@ Note this guide assumes that secrets and config maps have already been deployed.
 
 ## Configrue worker scaler
 
-Environment variables are used to configure the scaler
+Environment variables are used to configure the scaler.
 
-### Openshift pod name that will be auto scaled
+### OpenShift deployment that will be auto scaled
 ```
 $WORKER_POD_TO_SCALE
 ```

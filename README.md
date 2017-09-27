@@ -1,14 +1,13 @@
 [![Build Status](https://ci.centos.org/buildStatus/icon?job=devtools-fabric8-analytics-scaler-f8a-build-master)](https://ci.centos.org/job/devtools-fabric8-analytics-scaler-f8a-build-master/)
 
 # fabric8-analytics-worker-scaler
-Openshift service that scales fabric8 analytics workers based on SQS queue size.
-scale.sh is run periodically every minute for now.
+OpenShift service that scales fabric8-analytics workers based on number of messages in SQS.
 
 ### Checking SQS queue for messages
 
-Python script sqs_status accepts one parameter which is queue name
+Python script `sqs_status.py` accepts one parameter which is queue name
 
-`$ sqs_status.py -q $SQS_QUEUE_FOR_SCALING`
+`$ ./sqs_status.py -q $SQS_QUEUE_FOR_SCALING`
 
 ### Configure maximum and minimum number of pods for scaling
 
@@ -22,4 +21,4 @@ Python script sqs_status accepts one parameter which is queue name
 
 ### Deployment on openshift
 
-Openshift deployment information is located at [openshift](https://github.com/fabric8-analytics/fabric8-analytics-scaler/tree/master/openshift) directory
+OpenShift deployment information is located at [openshift](openshift/) directory
