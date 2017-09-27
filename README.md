@@ -13,12 +13,12 @@ Python script `sqs_status.py` accepts one parameter which is queue name
 
 `$ export DC_NAME=bayesian-worker-api`
 
-`$ export SQS_QUEUE_NAME=prod_ingestion_InitAnalysisFlow_v0`
+`$ export SQS_QUEUE_NAME=ingestion_InitAnalysisFlow_v0`
 
-`$ export DEFAULT_REPLICAS=2`
+`$ export DEFAULT_REPLICAS=5`
 
-`$ export MAX_REPLICAS=10`
+`$ export MAX_REPLICAS=30`
 
 ### Deployment on openshift
 
-OpenShift deployment information is located at [openshift](openshift/) directory
+OpenShift deployment information is located at [openshift](openshift/) directory.

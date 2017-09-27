@@ -10,7 +10,7 @@ oc project
 set +x
 
 # get number of messages in the given queue
-number_of_messages=$(./sqs_status.py -q $SQS_QUEUE_NAME)
+number_of_messages=$(./sqs_status.py -q ${DEPLOYMENT_PREFIX}_${SQS_QUEUE_NAME})
 
 echo "Number of messages in queue: $number_of_messages"
 

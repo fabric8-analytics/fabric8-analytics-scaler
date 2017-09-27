@@ -60,11 +60,29 @@ objects:
     - type: ConfigChange
 
 parameters:
-- description: Worker region for serving tasks - api or ingestion
-  displayName: Worker administration region
+- description: Name of the deployment config to scale
+  displayName: Deployment config name
   required: true
   name: DC_NAME
-  value: "api"
+  value: "bayesian-worker-ingestion"
+
+- description: Default (minimum) number of replicas
+  displayName: Min replicas
+  required: true
+  name: DEFAULT_REPLICAS
+  value: "5"
+
+- description: Max number of replicas
+  displayName: Max replicas
+  required: true
+  name: MAX_REPLICAS
+  value: "5"
+
+- description: Name of the queue to monitor (without deployment prefix)
+  displayName: Queue name
+  required: true
+  name: SQS_QUEUE_NAME
+  value: "ingestion_bayesianFlow_v0"
 
 - description: Docker registry where the image is
   displayName: Docker registry
