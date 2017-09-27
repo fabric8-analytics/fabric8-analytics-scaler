@@ -40,14 +40,14 @@ objects:
               secretKeyRef:
                 name: aws
                 key: sqs-secret-access-key
-          - name: WORKER_POD_TO_SCALE
-            value: "${WORKER_POD_TO_SCALE}"
-          - name: SQS_QUEUE_FOR_SCALING
-            value: "${SQS_QUEUE_FOR_SCALING}"
-          - name: DEFAULT_NUMBER_OF_PODS
-            value: "${DEFAULT_NUMBER_OF_PODS}"
-          - name: MAX_NUMBER_OF_PODS
-            value: "${MAX_NUMBER_OF_PODS}"
+          - name: DC_NAME
+            value: "${DC_NAME}"
+          - name: SQS_QUEUE_NAME
+            value: "${SQS_QUEUE_NAME}"
+          - name: DEFAULT_REPLICAS
+            value: "${DEFAULT_REPLICAS}"
+          - name: MAX_REPLICAS
+            value: "${MAX_REPLICAS}"
           image: "${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${IMAGE_TAG}"
           name: f8a-worker-scaler
           resources:
@@ -63,7 +63,7 @@ parameters:
 - description: Worker region for serving tasks - api or ingestion
   displayName: Worker administration region
   required: true
-  name: WORKER_POD_TO_SCALE
+  name: DC_NAME
   value: "api"
 
 - description: Docker registry where the image is
