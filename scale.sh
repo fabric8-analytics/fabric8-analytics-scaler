@@ -1,7 +1,7 @@
 #!/usr/bin/bash -e
 
 function scale_to_default { 
-    oc scale --replicas=$DEFAULT_REPLICAS dc $DC_NAME
+    oc -n $OC_PROJECT scale --replicas=$DEFAULT_REPLICAS dc $DC_NAME
 }
 
 set -x
@@ -16,16 +16,16 @@ while true; do
 
     #run scale based on number of messages
     if (( NUMBER_OF_MESSAGES > 10000 )); then
-        oc scale --replicas=$MAX_REPLICAS dc $DC_NAME
+        oc -n $OC_PROJECT scale --replicas=$MAX_REPLICAS dc $DC_NAME
 
     elif (( NUMBER_OF_MESSAGES < 5000 )); then
         scale_to_default
 
     elif (( NUMBER_OF_MESSAGES < 1000 )); then
-        oc scale --replicas=3 dc $DC_NAME
+        oc -n $OC_PROJECT scale --replicas=3 dc $DC_NAME
 
     elif (( NUMBER_OF_MESSAGES < 500 )); then
-        oc scale --replicas=2 dc $DC_NAME
+        oc -n $OC_PROJECT scale --replicas=2 dc $DC_NAME
     fi
 
     date -u +%s > /var/lib/f8a-scaler/liveness
