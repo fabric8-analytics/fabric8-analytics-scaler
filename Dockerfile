@@ -14,7 +14,8 @@ RUN pip3 install --upgrade pip && pip install --upgrade wheel && \
 RUN mkdir -p /home/scaler/ /var/lib/f8a-scaler/
 
 RUN echo 1 > /var/lib/f8a-scaler/liveness && \
-    echo 0 > /var/lib/f8a-scaler/liveness_prev
+    echo 0 > /var/lib/f8a-scaler/liveness_prev && \
+    chmod 666 /var/lib/f8a-scaler/liveness /var/lib/f8a-scaler/liveness_prev
 
 COPY scale.sh sqs_status.py liveness_check.sh /home/scaler/
 
