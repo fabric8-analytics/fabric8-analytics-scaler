@@ -31,3 +31,4 @@ RUN touch /var/log/cron.log && \
 
 
 CMD crond && tail -f /var/log/cron.log
+
