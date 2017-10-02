@@ -10,24 +10,24 @@ Note this guide assumes that secrets and config maps have already been deployed.
 
 ## Configrue worker scaler
 
-Environment variables are used to configure the scaler
+Environment variables are used to configure the scaler.
 
-### Openshift pod name that will be auto scaled
+### OpenShift deployment that will be auto scaled
 ```
-$WORKER_POD_TO_SCALE
+$DC_NAME
 ```
 
 ### Name of the SQS queue that will be used as scaling metrics
 ```
-$SQS_QUEUE_FOR_SCALING
+$SQS_QUEUE_NAME
 ```
 ### Number of pods that are used by default for this deployement
 ```
-$DEFAULT_NUMBER_OF_PODS
+$DEFAULT_REPLICAS
 ```
 ### Upper limit of pods that we will scale to
 ```
-$MAX_NUMBER_OF_PODS
+$MAX_REPLICAS
 ```
 
 

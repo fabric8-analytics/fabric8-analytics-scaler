@@ -7,24 +7,28 @@ RUN yum --setopt=tsflags=nodocs install -y epel-release centos-release-openshift
     yum --setopt=tsflags=nodocs install -y cronie crontabs python34-pip wget python34-devel libxml2-devel libxslt-devel python34-requests python34-pycurl origin-clients && \
     yum clean all
 
+COPY requirements.txt /tmp/
 RUN pip3 install --upgrade pip && pip install --upgrade wheel && \
-    pip3 install boto3
+    pip3 install -r /tmp/requirements.txt
 
-RUN mkdir -p /home/scaler
+RUN mkdir -p /home/scaler/ /var/lib/f8a-scaler/
 
-COPY scale.sh /home/scaler
-COPY sqs_status.py /home/scaler
-
-ADD scalerjob /etc/cron.d/scalerjob
+COPY scale.sh sqs_status.py liveness_check.sh /home/scaler/
+COPY scalerjob /etc/cron.d/scalerjob
 
 WORKDIR /home/scaler
 
-RUN chmod 0644 /etc/cron.d/scalerjob
+RUN chmod 0644 /etc/cron.d/scalerjob && \
+    chmod 0777 /var/lib/f8a-scaler/ && \
+    chmod 0777 /var/run/
 
-#Workaround centos crond problem
+# Workaround centos crond problem
 RUN sed -i '/session required pam_loginuid.so/d' /etc/pam.d/crond
 
-RUN touch /var/log/cron.log
+RUN touch /var/log/cron.log && \
+    echo 1 > /var/lib/f8a-scaler/liveness && \
+    echo 0 > /var/lib/f8a-scaler/liveness_prev
 
 
 CMD crond && tail -f /var/log/cron.log
+

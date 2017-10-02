@@ -14,6 +14,7 @@ objects:
       service: f8a-worker-scaler
     name: f8a-worker-scaler
   spec:
+    replicas: 1
     selector:
       service: f8a-worker-scaler
     strategy:
@@ -25,8 +26,6 @@ objects:
       spec:
         containers:
         - env:
-          - name: OPENSHIFT_DEPLOYMENT
-            value: "${OPENSHIFT_DEPLOYMENT}"
           - name: DEPLOYMENT_PREFIX
             valueFrom:
               configMapKeyRef:
@@ -42,75 +41,60 @@ objects:
               secretKeyRef:
                 name: aws
                 key: sqs-secret-access-key
-          - name: AWS_S3_ACCESS_KEY_ID
-            valueFrom:
-              secretKeyRef:
-               name: aws
-               key: s3-access-key-id
-          - name: AWS_S3_SECRET_ACCESS_KEY
-            valueFrom:
-              secretKeyRef:
-                name: aws
-                key: s3-secret-access-key
-          - name: BAYESIAN_SYNC_S3
-            valueFrom:
-              secretKeyRef:
-                name: aws
-                key: sync-s3
-          - name: GITHUB_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: worker
-                key: github-token
-          - name: AWS_S3_BUCKET_NAME
-            valueFrom:
-              configMapKeyRef:
-                name: bayesian-config
-                key: s3-bucket-for-analyses
-          - name: WORKER_POD_TO_SCALE
-            value: "${WORKER_POD_TO_SCALE}"
-          - name: SQS_QUEUE_FOR_SCALING
-            value: "${SQS_QUEUE_FOR_SCALING}"
-          - name: DEFAULT_NUMBER_OF_PODS
-            value: "${DEFAULT_NUMBER_OF_PODS}"
-          - name: MAX_NUMBER_OF_PODS
-            value: "${MAX_NUMBER_OF_PODS}"
+          - name: DC_NAME
+            value: "${DC_NAME}"
+          - name: SQS_QUEUE_NAME
+            value: "${SQS_QUEUE_NAME}"
+          - name: DEFAULT_REPLICAS
+            value: "${DEFAULT_REPLICAS}"
+          - name: MAX_REPLICAS
+            value: "${MAX_REPLICAS}"
           image: "${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${IMAGE_TAG}"
           name: f8a-worker-scaler
+          resources:
+            requests:
+              memory: "128Mi"
+            limits:
+              memory: "256Mi"
           readinessProbe:
             exec:
-              command: ["worker-readiness.sh"]
-            initialDelaySeconds: 10
-            periodSeconds: 10
+              command: ["true"]
+            initialDelaySeconds: 5
             timeoutSeconds: 5
           livenessProbe:
             exec:
-              command: ["worker-liveness.sh"]
-            initialDelaySeconds: 20
-            periodSeconds: 60
+              command: ["liveness_check.sh"]
+            initialDelaySeconds: 5
+            periodSeconds: 120
             timeoutSeconds: 5
-          resources:
-            requests:
-              memory: "512Mi"
-            limits:
-              memory: "2048Mi"
         restartPolicy: Always
-    test: false
     triggers:
     - type: ConfigChange
 
 parameters:
-- description: Worker region for serving tasks - api or ingestion
-  displayName: Worker administration region
+- description: Name of the deployment config to scale
+  displayName: Deployment config name
   required: true
-  name: WORKER_POD_TO_SCALE
-  value: "api"
+  name: DC_NAME
+  value: "bayesian-worker-ingestion"
 
-- description: Turn off tasks that are run on OpenShift instance and require internal services
-  displayName: Openshift deployment
+- description: Default (minimum) number of replicas
+  displayName: Min replicas
   required: true
-  name: OPENSHIFT_DEPLOYMENT
-  value: "1"
+  name: DEFAULT_REPLICAS
+  value: "5"
+
+- description: Max number of replicas
+  displayName: Max replicas
+  required: true
+  name: MAX_REPLICAS
+  value: "5"
+
+- description: Name of the queue to monitor (without deployment prefix)
+  displayName: Queue name
+  required: true
+  name: SQS_QUEUE_NAME
+  value: "ingestion_bayesianFlow_v0"
 
 - description: Docker registry where the image is
   displayName: Docker registry
@@ -122,7 +106,7 @@ parameters:
   displayName: Docker image
   required: true
   name: DOCKER_IMAGE
-  value: "bayesian/worker-scaler"
+  value: "fabric8-analytics/worker-scaler"
 
 - description: Image tag
   displayName: Image tag
