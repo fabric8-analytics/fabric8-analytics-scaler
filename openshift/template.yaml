@@ -63,7 +63,7 @@ objects:
             timeoutSeconds: 5
           livenessProbe:
             exec:
-              command: ["liveness_check.sh"]
+              command: ["/home/scaler/liveness_check.sh"]
             initialDelaySeconds: 5
             periodSeconds: 120
             timeoutSeconds: 5
