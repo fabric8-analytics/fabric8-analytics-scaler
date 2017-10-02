@@ -19,7 +19,8 @@ COPY scalerjob /etc/cron.d/scalerjob
 WORKDIR /home/scaler
 
 RUN chmod 0644 /etc/cron.d/scalerjob && \
-    chmod 0777 /var/lib/f8a-scaler/
+    chmod 0777 /var/lib/f8a-scaler/ && \
+    chmod 0777 /var/run/
 
 # Workaround centos crond problem
 RUN sed -i '/session required pam_loginuid.so/d' /etc/pam.d/crond
