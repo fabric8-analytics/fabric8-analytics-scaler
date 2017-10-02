@@ -28,3 +28,5 @@ elif (( NUMBER_OF_MESSAGES < 500 )); then
     oc scale --replicas=2 dc $DC_NAME
 fi
 
+date -u +%s > /var/lib/f8a-scaler/liveness
+
