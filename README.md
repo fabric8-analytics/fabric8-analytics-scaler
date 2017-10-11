@@ -1,7 +1,11 @@
 [![Build Status](https://ci.centos.org/buildStatus/icon?job=devtools-fabric8-analytics-scaler-f8a-build-master)](https://ci.centos.org/job/devtools-fabric8-analytics-scaler-f8a-build-master/)
 
+
 # fabric8-analytics-worker-scaler
 OpenShift service that scales fabric8-analytics workers based on number of messages in SQS.
+This service uses oc-clients package, command oc scale is used to scale the deployment.
+This requires to have mounted service account inside the container.
+We are using workerscaler service account for that. Definitions and role binding  are available in openshift dir.
 
 ### Checking SQS queue for messages
 
