@@ -3,25 +3,49 @@
 
 # fabric8-analytics-worker-scaler
 OpenShift service that scales fabric8-analytics workers based on number of messages in SQS.
-This service uses oc-clients package, command oc scale is used to scale the deployment.
+This service directly uses `oc` command-line tool to scale the deployment.
 This requires to have mounted service account inside the container.
-We are using workerscaler service account for that. Definitions and role binding  are available in openshift dir.
+`workerscaler` service account for that purpose by default. Definitions and role binding of the service account
+are available in the [openshift/](openshift/) directory.
 
-### Checking SQS queue for messages
+
+## Configuration
+
+The service needs to be configured via environment variables.
+The list of variables recognized by the service follows.
+
+`DC_NAME`
+
+Name of the deployment config to scale. Default value: `bayesian-worker-ingestion`
+
+`DEFAULT_REPLICAS`
+
+Default (minimum) number of replicas. Default value: 5
+
+`MAX_REPLICAS`
+
+Max number of replicas. Default value: 10
+
+`SQS_QUEUE_NAME`
+
+Name of the queue to monitor (without deployment prefix). Default value: `ingestion_bayesianFlow_v0`
+
+`OC_PROJECT`
+
+Name of the project in OpenShift where to apply the changes. Default value: `bayesian-preview`
+
+
+The default values can be tweaked directly in the [template](openshift/template.yaml).
+The values for specific deployments (staging, production) can be set
+in [openshiftio/saas-analytics](https://github.com/openshiftio/saas-analytics/blob/master/bay-services/worker-scaler.yaml) repository.
+
+
+### Script for checking number of messages in given SQS queue
 
 Python script `sqs_status.py` accepts one parameter which is queue name
 
 `$ ./sqs_status.py -q $SQS_QUEUE_NAME`
 
-### Configure maximum and minimum number of pods for scaling
-
-`$ export DC_NAME=bayesian-worker-api`
-
-`$ export SQS_QUEUE_NAME=ingestion_InitAnalysisFlow_v0`
-
-`$ export DEFAULT_REPLICAS=5`
-
-`$ export MAX_REPLICAS=30`
 
 ### Deployment on openshift
 

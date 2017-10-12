@@ -90,7 +90,7 @@ parameters:
   displayName: Max replicas
   required: true
   name: MAX_REPLICAS
-  value: "5"
+  value: "10"
 
 - description: Name of the queue to monitor (without deployment prefix)
   displayName: Queue name
