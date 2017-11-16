@@ -57,9 +57,11 @@ objects:
           name: f8a-worker-scaler
           resources:
             requests:
-              memory: "128Mi"
+              memory: "32Mi"
+              cpu: "250m"
             limits:
-              memory: "256Mi"
+              memory: "64Mi"
+              cpu: "500m"
           readinessProbe:
             exec:
               command: ["true"]
