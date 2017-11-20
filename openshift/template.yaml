@@ -49,15 +49,19 @@ objects:
             value: "${DEFAULT_REPLICAS}"
           - name: MAX_REPLICAS
             value: "${MAX_REPLICAS}"
+          - name: SCALE_COEF
+            value: "${SCALE_COEF}"
           - name: OC_PROJECT
             value: "${OC_PROJECT}"
           image: "${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${IMAGE_TAG}"
           name: f8a-worker-scaler
           resources:
             requests:
-              memory: "128Mi"
+              memory: "32Mi"
+              cpu: "250m"
             limits:
-              memory: "256Mi"
+              memory: "64Mi"
+              cpu: "500m"
           readinessProbe:
             exec:
               command: ["true"]
@@ -92,6 +96,12 @@ parameters:
   required: true
   name: MAX_REPLICAS
   value: "10"
+
+- description: Number of messages that singe worker can process in some reasonable time
+  displayName: Scale coefficient
+  required: true
+  name: SCALE_COEF
+  value: "100"
 
 - description: Name of the queue to monitor (without deployment prefix)
   displayName: Queue name
