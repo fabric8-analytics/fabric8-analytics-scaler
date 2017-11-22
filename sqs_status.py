@@ -27,7 +27,7 @@ def get_number_of_messages(queue_name):
     :return: approximate number of messages in the given queue
     """
     queue = sqs.get_queue_by_name(QueueName=queue_name)
-    return queue.attributes.get('ApproximateNumberOfMessages')
+    return int(queue.attributes.get('ApproximateNumberOfMessages') or 0)
 
 
 def get_number_of_replicas(msg_count):
