@@ -42,6 +42,10 @@ Number of messages that singe worker is able to process, i.e. no need to spawn a
 
 Interval, in minutes, how often to run the scaler.
 
+`DRY_RUN`
+
+Run in dry-run mode, do not scale anything. Default value: `false`
+
 
 The default values can be tweaked directly in the [template](openshift/template.yaml).
 The values for specific deployments (staging, production) can be set

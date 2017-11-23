@@ -111,6 +111,12 @@ parameters:
   name: SLEEP_INTERVAL
   value: "5"
 
+- description: Dry run - do not scale anything (true/false)
+  displayName: Dry run
+  required: true
+  name: DRY_RUN
+  value: "false"
+
 - description: A comma-separated list of queues to monitor (without deployment prefix)
   displayName: Queues to monitor
   required: true
