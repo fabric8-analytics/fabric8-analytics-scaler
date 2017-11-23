@@ -28,7 +28,7 @@ logger = logging.getLogger('sqs_status')
 def get_number_of_messages(queues_str):
     """Return approximate number of messages in given queue(s).
 
-    :param queues_str: a comma-separated list of queues to check
+    :param queues_str: a comma-separated list of queues to check, without deployment prefix
     :return: approximate number of messages in given queues
     """
 
@@ -36,11 +36,12 @@ def get_number_of_messages(queues_str):
 
     total_count = 0
     for queue_name in queues:
+        full_queue_name = '{p}_{q}'.format(p=os.environ.get('DEPLOYMENT_PREFIX'), q=queue_name)
         try:
-            queue = sqs.get_queue_by_name(QueueName=queue_name)
+            queue = sqs.get_queue_by_name(QueueName=full_queue_name)
             total_count += int(queue.attributes.get('ApproximateNumberOfMessages') or 0)
         except Exception as e:
-            logger.warning('Unable to check queue: {q}'.format(q=queue_name), exc_info=True)
+            logger.warning('Unable to check queue: {q}'.format(q=full_queue_name), exc_info=True)
             continue
 
     return total_count
