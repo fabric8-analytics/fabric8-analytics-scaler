@@ -1,4 +1,6 @@
-#!/usr/bin/bash -e
+#!/usr/bin/bash
+
+set -e
 
 set -x
 oc whoami
@@ -9,7 +11,7 @@ queue_name=${DEPLOYMENT_PREFIX}_${SQS_QUEUE_NAME}
 
 while true; do
     # get number of messages in the given queue
-    msg_count replicas <<< $(./sqs_status.py -q ${queue_name})
+    read msg_count replicas <<< $(./sqs_status.py -q ${queue_name})
 
     echo "[$(date -u)] Number of messages in ${queue_name} is ${msg_count}. Replicas needed: ${replicas}."
     set -x
