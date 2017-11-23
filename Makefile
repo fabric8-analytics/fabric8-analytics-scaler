@@ -12,7 +12,8 @@ docker-build:
 fast-docker-build:
 	docker build -t $(REGISTRY)/$(REPOSITORY):$(DEFAULT_TAG) .
 
-test: fast-docker-build
+test:
+	./runtest.sh
 
 get-image-name:
 	@echo $(REGISTRY)/$(REPOSITORY):$(DEFAULT_TAG)

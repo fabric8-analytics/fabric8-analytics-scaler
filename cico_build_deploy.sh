@@ -4,8 +4,8 @@ set -ex
 
 . cico_setup.sh
 
-build_image
+make test
 
-#IMAGE_NAME=$(make get-image-name) ./tests/run_integration_tests.sh
+build_image
 
 push_image
