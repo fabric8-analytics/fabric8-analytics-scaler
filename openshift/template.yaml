@@ -51,6 +51,8 @@ objects:
             value: "${MAX_REPLICAS}"
           - name: SCALE_COEF
             value: "${SCALE_COEF}"
+          - name: SLEEP_INTERVAL
+            value: "${SLEEP_INTERVAL}"
           - name: OC_PROJECT
             value: "${OC_PROJECT}"
           image: "${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${IMAGE_TAG}"
@@ -103,11 +105,17 @@ parameters:
   name: SCALE_COEF
   value: "100"
 
-- description: Name of the queue to monitor (without deployment prefix)
-  displayName: Queue name
+- description: How long to sleep between runs (in minutes).
+  displayName: Sleep interval
+  required: true
+  name: SLEEP_INTERVAL
+  value: "5"
+
+- description: A comma-separated list of queues to monitor (without deployment prefix)
+  displayName: Queues to monitor
   required: true
   name: SQS_QUEUE_NAME
-  value: "ingestion_bayesianFlow_v0"
+  value: "ingestion_bayesianFlow_v0,ingestion_bayesianPackageFlow_v0"
 
 - description: Name of the openshift project used for oc command
   displayName: Openshift Project Name

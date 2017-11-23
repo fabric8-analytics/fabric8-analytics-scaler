@@ -4,6 +4,7 @@ import argparse
 import os
 import sys
 import math
+import logging
 
 import boto3
 
@@ -20,14 +21,29 @@ default_min_replicas = 1
 default_scale_coef = 100
 
 
-def get_number_of_messages(queue_name):
-    """Return approximate number of messages in given queue.
+logging.basicConfig(level=logging.WARNING)
+logger = logging.getLogger('sqs_status')
 
-    :param queue_name: name of the queue to check
-    :return: approximate number of messages in the given queue
+
+def get_number_of_messages(queues_str):
+    """Return approximate number of messages in given queue(s).
+
+    :param queues_str: a comma-separated list of queues to check
+    :return: approximate number of messages in given queues
     """
-    queue = sqs.get_queue_by_name(QueueName=queue_name)
-    return int(queue.attributes.get('ApproximateNumberOfMessages') or 0)
+
+    queues = [x.strip() for x in queues_str.split(',')]
+
+    total_count = 0
+    for queue_name in queues:
+        try:
+            queue = sqs.get_queue_by_name(QueueName=queue_name)
+            total_count += int(queue.attributes.get('ApproximateNumberOfMessages') or 0)
+        except Exception as e:
+            logger.warning('Unable to check queue: {q}'.format(q=queue_name), exc_info=True)
+            continue
+
+    return total_count
 
 
 def get_number_of_replicas(msg_count):
@@ -62,6 +78,6 @@ if __name__ == '__main__':
         print(parser.format_usage())
         sys.exit(1)
 
-    count = get_number_of_messages(queue_name=args.queue)
+    count = get_number_of_messages(queues_str=args.queue)
     replicas = get_number_of_replicas(msg_count=count)
     print('{count} {replicas}'.format(count=count, replicas=replicas))

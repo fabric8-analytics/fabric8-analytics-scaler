@@ -34,6 +34,14 @@ Name of the queue to monitor (without deployment prefix). Default value: `ingest
 
 Name of the project in OpenShift where to apply the changes. Default value: `bayesian-preview`
 
+`SCALE_COEF`
+
+Number of messages that singe worker is able to process, i.e. no need to spawn additional pods.
+
+`SLEEP_INTERVAL`
+
+Interval, in minutes, how often to run the scaler.
+
 
 The default values can be tweaked directly in the [template](openshift/template.yaml).
 The values for specific deployments (staging, production) can be set
