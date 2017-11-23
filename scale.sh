@@ -15,9 +15,9 @@ while true; do
 
     echo "[$(date -u)] Number of messages in ${queue_name} is ${msg_count}. Replicas needed: ${replicas}."
     set -x
-    oc -n $OC_PROJECT scale --replicas=${replicas} dc $DC_NAME
+    oc -n ${OC_PROJECT} scale --replicas=${replicas} dc ${DC_NAME}
     set +x
 
     date -u +%s > /var/lib/f8a-scaler/liveness
-    sleep 5m
+    sleep ${SLEEP_INTERVAL}m
 done

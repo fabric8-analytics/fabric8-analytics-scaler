@@ -51,6 +51,8 @@ objects:
             value: "${MAX_REPLICAS}"
           - name: SCALE_COEF
             value: "${SCALE_COEF}"
+          - name: SLEEP_INTERVAL
+            value: "${SLEEP_INTERVAL}"
           - name: OC_PROJECT
             value: "${OC_PROJECT}"
           image: "${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${IMAGE_TAG}"
@@ -102,6 +104,12 @@ parameters:
   required: true
   name: SCALE_COEF
   value: "100"
+
+- description: How long to sleep between runs (in minutes).
+  displayName: Sleep interval
+  required: true
+  name: SLEEP_INTERVAL
+  value: "5"
 
 - description: Name of the queue to monitor (without deployment prefix)
   displayName: Queue name
