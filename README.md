@@ -20,11 +20,11 @@ Name of the deployment config to scale. Default value: `bayesian-worker-ingestio
 
 `DEFAULT_REPLICAS`
 
-Default (minimum) number of replicas. Default value: `5`
+Default (minimum) number of replicas. Default value: `1`
 
 `MAX_REPLICAS`
 
-Max number of replicas. Default value: `10`
+Max number of replicas. Default value: `2`
 
 `SQS_QUEUE_NAME`
 
