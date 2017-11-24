@@ -11,9 +11,10 @@ load_jenkins_vars() {
 }
 
 prep() {
-    yum -y update
-    yum -y install docker git
+    yum -y install epel-release
+    yum -y install docker git python34-pip
     systemctl start docker
+    pip3 install -r requirements.txt
 }
 
 build_image() {

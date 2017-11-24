@@ -53,6 +53,8 @@ objects:
             value: "${SCALE_COEF}"
           - name: SLEEP_INTERVAL
             value: "${SLEEP_INTERVAL}"
+          - name: DRY_RUN
+            value: "${DRY_RUN}"
           - name: OC_PROJECT
             value: "${OC_PROJECT}"
           image: "${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${IMAGE_TAG}"
@@ -91,13 +93,13 @@ parameters:
   displayName: Min replicas
   required: true
   name: DEFAULT_REPLICAS
-  value: "5"
+  value: "1"
 
 - description: Max number of replicas
   displayName: Max replicas
   required: true
   name: MAX_REPLICAS
-  value: "10"
+  value: "2"
 
 - description: Number of messages that singe worker can process in some reasonable time
   displayName: Scale coefficient
@@ -110,6 +112,12 @@ parameters:
   required: true
   name: SLEEP_INTERVAL
   value: "5"
+
+- description: Dry run - do not scale anything (true/false)
+  displayName: Dry run
+  required: true
+  name: DRY_RUN
+  value: "false"
 
 - description: A comma-separated list of queues to monitor (without deployment prefix)
   displayName: Queues to monitor
