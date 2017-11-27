@@ -78,7 +78,7 @@ objects:
             periodSeconds: 120
             timeoutSeconds: 5
         restartPolicy: Always
-        serviceaccountname: workerscaler
+        serviceAccountName: workerscaler
     triggers:
     - type: ConfigChange
 
