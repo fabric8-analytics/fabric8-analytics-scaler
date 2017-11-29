@@ -11,18 +11,18 @@ objects:
   kind: DeploymentConfig
   metadata:
     labels:
-      service: f8a-worker-scaler
-    name: f8a-worker-scaler
+      service: f8a-worker-scaler-${DC_NAME}
+    name: f8a-worker-scaler-${DC_NAME}
   spec:
     replicas: 1
     selector:
-      service: f8a-worker-scaler
+      service: f8a-worker-scaler-${DC_NAME}
     strategy:
       type: Rolling
     template:
       metadata:
         labels:
-          service: f8a-worker-scaler
+          service: f8a-worker-scaler-${DC_NAME}
       spec:
         containers:
         - env:
