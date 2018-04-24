@@ -4,7 +4,7 @@ MAINTAINER Tomas Hrcka <thrcka@redhat.com>
 ENV LANG=en_US.UTF-8
 
 RUN yum --setopt=tsflags=nodocs install -y epel-release centos-release-openshift-origin && \
-    yum --setopt=tsflags=nodocs install -y python34-pip wget python34-devel libxml2-devel libxslt-devel python34-requests python34-pycurl origin-clients && \
+    yum --setopt=tsflags=nodocs install -y python34-pip wget python34-devel libxml2-devel libxslt-devel python34-requests python34-pycurl origin-clients-3.7 && \
     yum clean all
 
 COPY requirements.txt /tmp/
