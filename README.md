@@ -55,3 +55,5 @@ in [openshiftio/saas-analytics](https://github.com/openshiftio/saas-analytics/bl
 ### Deployment on openshift
 
 OpenShift deployment information is located at [openshift](openshift/) directory.
+
+
