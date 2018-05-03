@@ -1,3 +1,5 @@
+#base image sources https://github.com/rhdt/EL-Dockerfiles/blob/master/base/fabric8-analytics-scaler/Dockerfile
+
 FROM prod.registry.devshift.net/osio-prod/base/fabric8-analytics-scaler:latest
 
 ENV LANG=en_US.UTF-8
