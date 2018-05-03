@@ -1,4 +1,4 @@
-#FROM registry.centos.org/centos/centos:7
+FROM prod.registry.devshift.net/osio-prod/base/fabric8-analytics-scaler:latest
 
 ENV LANG=en_US.UTF-8
 
