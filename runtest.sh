@@ -2,4 +2,4 @@
 
 set -ex
 
-python3 -m doctest *.py
+python3 -m doctest sqs_status.py
