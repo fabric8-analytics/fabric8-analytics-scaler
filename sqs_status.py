@@ -41,6 +41,7 @@ def get_number_of_messages(queues_str):
             queue = sqs.get_queue_by_name(QueueName=full_queue_name)
             total_count += int(queue.attributes.get('ApproximateNumberOfMessages') or 0)
         except Exception as e:
+            assert e is not None  # make linters happy
             logger.warning('Unable to check queue: {q}'.format(q=full_queue_name), exc_info=True)
             continue
 
