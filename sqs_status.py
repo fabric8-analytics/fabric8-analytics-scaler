@@ -68,7 +68,7 @@ def get_number_of_replicas(msg_count):
     max_replicas = int(os.environ.get('MAX_REPLICAS', default_max_replicas))
     min_replicas = int(os.environ.get('DEFAULT_REPLICAS', default_min_replicas))
     scale_coef = int(os.environ.get('SCALE_COEF', default_scale_coef))
-    return max(min_replicas, min(int(math.ceil(msg_count/scale_coef)), max_replicas))
+    return max(min_replicas, min(int(math.ceil(msg_count / scale_coef)), max_replicas))
 
 
 if __name__ == '__main__':
