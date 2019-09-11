@@ -102,3 +102,6 @@ ENV/
 
 .vscode/
 .idea/
+
+.err
+
