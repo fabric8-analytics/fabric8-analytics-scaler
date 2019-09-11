@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-directories="."
+IFS=$'\n'
+
+# list of directories with sources to check
+directories=$(cat directories.txt)
+
 pass=0
 fail=0
 
@@ -66,3 +70,4 @@ else
     echo "Documentation strings should be added and/or fixed in $fail source files out of $total files"
     exit 1
 fi
+
