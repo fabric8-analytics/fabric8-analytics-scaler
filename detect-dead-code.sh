@@ -1,15 +1,18 @@
 #!/bin/bash
 
-directories="."
+IFS=$'\n'
+
+# list of directories with sources to check
+directories=$(cat directories.txt)
 
 pass=0
 fail=0
 
 function prepare_venv() {
-    VIRTUALENV=$(which virtualenv)
+    VIRTUALENV="$(which virtualenv)"
     if [ $? -eq 1 ]; then
         # python36 which is in CentOS does not have virtualenv binary
-        VIRTUALENV=$(which virtualenv-3)
+        VIRTUALENV="$(which virtualenv-3)"
     fi
 
     ${VIRTUALENV} -p python3 venv && source venv/bin/activate && python3 "$(which pip3)" install vulture
@@ -54,6 +57,7 @@ do
     check_files "$files"
 done
 
+
 if [ $fail -eq 0 ]
 then
     echo "All checks passed for $pass source files"
@@ -62,3 +66,4 @@ else
     echo "$fail source files out of $total files seems to contain dead code and/or unused imports"
     exit 1
 fi
+
