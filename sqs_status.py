@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+"""Report recommended number of worker replicas for given queue."""
+
 import argparse
 import os
 import sys
@@ -31,7 +33,6 @@ def get_number_of_messages(queues_str):
     :param queues_str: a comma-separated list of queues to check, without deployment prefix
     :return: approximate number of messages in given queues
     """
-
     queues = [x.strip() for x in queues_str.split(',')]
 
     total_count = 0
