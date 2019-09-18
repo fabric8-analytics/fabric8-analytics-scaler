@@ -60,7 +60,7 @@ OpenShift deployment information is located at [openshift](openshift/) directory
 
 #### Check for all possible issues
 
-The script named `check-all.sh` is to be used to check the sources for all detectable errors and issues. This script can be run w/o any arguments:
+The script named `check-all.sh` that is stored in the `qa` subdirectory is to be used to check the sources for all detectable errors and issues. This script can be run w/o any arguments:
 
 ```
 ./check-all.sh
