@@ -8,8 +8,8 @@ RUN yum --setopt=tsflags=nodocs install -y epel-release centos-release-openshift
     yum clean all
 
 COPY requirements.txt /tmp/
-RUN pip3 install --upgrade pip && pip install --upgrade wheel && \
-    pip3 install -r /tmp/requirements.txt
+RUN pip3 install --upgrade pip && pip install --upgrade wheel
+RUN pip3 install -r /tmp/requirements.txt
 
 RUN mkdir -p /home/scaler/ /var/lib/f8a-scaler/
 
