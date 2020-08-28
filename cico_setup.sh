@@ -20,6 +20,8 @@ load_jenkins_vars() {
 prep() {
     yum -y install epel-release
     yum -y install docker git python36-pip
+    # This we should remove once the package subscription-manager-rhsm-certificates fixed
+    touch /etc/rhsm/ca/redhat-uep.pem
     systemctl start docker
     pip3 install -r requirements.txt
 }
