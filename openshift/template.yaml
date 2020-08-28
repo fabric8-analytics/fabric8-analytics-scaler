@@ -68,8 +68,6 @@ objects:
             value: "${SLEEP_INTERVAL}"
           - name: DRY_RUN
             value: "${DRY_RUN}"
-          - name: OC_PROJECT
-            value: "${OC_PROJECT}"
           image: "${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${IMAGE_TAG}"
           name: f8a-worker-scaler
           resources:
@@ -137,12 +135,6 @@ parameters:
   required: true
   name: SQS_QUEUE_NAME
   value: "ingestion_bayesianFlow_v0,ingestion_bayesianPackageFlow_v0"
-
-- description: Name of the openshift project used for oc command
-  displayName: Openshift Project Name
-  required: true
-  name: OC_PROJECT
-  value: "bayesian-preview"
 
 - description: Docker registry where the image is
   displayName: Docker registry
