@@ -8,6 +8,19 @@ metadata:
     description: f8a-worker-scaler
 objects:
 - apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    name: workerscaler
+- apiVersion: v1
+  kind: RoleBinding
+  metadata:
+    name: workerscaler-edit
+  roleRef:
+    name: edit
+  subjects:
+  - kind: ServiceAccount
+    name: workerscaler
+- apiVersion: v1
   kind: DeploymentConfig
   metadata:
     labels:
