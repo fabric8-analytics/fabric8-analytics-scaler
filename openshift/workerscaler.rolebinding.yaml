@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: RoleBinding
-metadata:
-  name: workerscaler-edit
-roleRef:
-  name: edit
-subjects:
-- kind: ServiceAccount
-  name: workerscaler

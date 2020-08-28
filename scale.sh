@@ -25,10 +25,10 @@ while true; do
     echo "[$(date -u)] Number of messages in ${DEPLOYMENT_PREFIX}_{${SQS_QUEUE_NAME}} is ${msg_count}. Replicas needed: ${replicas}."
 
     if [ "$dry_run" == "True" ]; then
-        echo "[DRY-RUN] oc -n ${OC_PROJECT} scale --replicas=${replicas} dc ${DC_NAME}"
+        echo "[DRY-RUN] oc scale --replicas=${replicas} dc ${DC_NAME}"
     else
         set -x
-        oc -n ${OC_PROJECT} scale --replicas=${replicas} dc ${DC_NAME}
+        oc scale --replicas=${replicas} dc ${DC_NAME}
         set +x
     fi
 
